@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FDMS.Migrations
 {
-    public partial class createtableflight0404v10 : Migration
+    public partial class createflight0404v100 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,8 @@ namespace FDMS.Migrations
                 columns: table => new
                 {
                     FlightId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FlightId1 = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FlightCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Route = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PointOfLoading = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -21,12 +23,12 @@ namespace FDMS.Migrations
                     DepartureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Signature = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Confirm = table.Column<bool>(type: "bit", nullable: true),
+                    IsConfirm = table.Column<bool>(type: "bit", nullable: true),
                     AccountConfirm = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Flight", x => x.FlightId);
+                    table.PrimaryKey("PK_Flight", x => new { x.FlightId, x.FlightId1 });
                     table.ForeignKey(
                         name: "FK_Flight_Account_AccountConfirm",
                         column: x => x.AccountConfirm,

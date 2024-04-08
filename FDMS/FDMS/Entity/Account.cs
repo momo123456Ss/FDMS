@@ -12,6 +12,9 @@ namespace FDMS.Entity
         {
             Account_GroupPermissions = new HashSet<Account_GroupPermission>();
             AccountSessions = new HashSet<AccountSession>();
+            Flight_Accounts = new HashSet<Flight_Account>();
+            DocumentTypes = new HashSet<DocumentType>();
+            FlightDocuments = new HashSet<FlightDocument>();
         }
         [Key]
         [Required]
@@ -39,5 +42,11 @@ namespace FDMS.Entity
         public virtual ICollection<Account_GroupPermission> Account_GroupPermissions { get; set; }
         [JsonIgnore]
         public virtual ICollection<AccountSession> AccountSessions { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Flight_Account> Flight_Accounts { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<DocumentType> DocumentTypes { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<FlightDocument> FlightDocuments { get; set; }
     }
 }

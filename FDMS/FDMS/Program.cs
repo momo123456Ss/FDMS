@@ -3,6 +3,10 @@ using FDMS.Entity;
 using FDMS.Model;
 using FDMS.Repository.AccountRepository;
 using FDMS.Repository.AccountSessionRepository;
+using FDMS.Repository.DocumentTypeRepository;
+using FDMS.Repository.FDHistoryRepository;
+using FDMS.Repository.FlightDocumentRepository;
+using FDMS.Repository.FlightRepository;
 using FDMS.Repository.GeneralRepository;
 using FDMS.Repository.GroupPermission;
 using FDMS.Repository.RoleRepository;
@@ -97,6 +101,10 @@ builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IGroupPermissionRepository, GroupPermissionRepository>();
 builder.Services.AddScoped<ISystemNoficationRepository, SystemNoficationRepository>();
 builder.Services.AddScoped<IAccountSessionRepository, AccountSessionRepository>();
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
+builder.Services.AddScoped<IDocumentTypeRepository, DocumentTypeRepository>();
+builder.Services.AddScoped<IFlightDocumentRepository, FlightDocumentRepository>();
+builder.Services.AddScoped<IFDRepository, FDRepository>();
 
 #endregion
 builder.Services.AddControllers();

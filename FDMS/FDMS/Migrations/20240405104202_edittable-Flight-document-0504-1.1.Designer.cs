@@ -4,6 +4,7 @@ using FDMS.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FDMS.Migrations
 {
     [DbContext(typeof(FDMSContext))]
-    partial class FDMSContextModelSnapshot : ModelSnapshot
+    [Migration("20240405104202_edittable-Flight-document-0504-1.1")]
+    partial class edittableFlightdocument050411
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,9 +299,6 @@ namespace FDMS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FlightDocumentId"), 1L, 1);
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Creator")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
@@ -327,7 +326,7 @@ namespace FDMS.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("FlightDocumentIdFK")
+                    b.Property<int>("FlightDocumentIdFK")
                         .HasColumnType("int");
 
                     b.Property<int>("FlightId")
@@ -336,9 +335,6 @@ namespace FDMS.Migrations
                     b.Property<string>("Note")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("Version")
                         .HasColumnType("int");
@@ -357,29 +353,6 @@ namespace FDMS.Migrations
                     b.HasIndex("FlightId");
 
                     b.ToTable("FlightDocument");
-                });
-
-            modelBuilder.Entity("FDMS.Entity.FlightDocument_GroupPermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("FlightDocumentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GroupPermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FlightDocumentId");
-
-                    b.HasIndex("GroupPermissionId");
-
-                    b.ToTable("FlightDocument_GroupPermissions");
                 });
 
             modelBuilder.Entity("FDMS.Entity.General", b =>
@@ -598,7 +571,8 @@ namespace FDMS.Migrations
                     b.HasOne("FDMS.Entity.FlightDocument", "FlightDocumentNavigation")
                         .WithMany("FlightDocuments")
                         .HasForeignKey("FlightDocumentIdFK")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("FDMS.Entity.Flight", "FlightNavigation")
                         .WithMany("FlightDocuments")
@@ -613,25 +587,6 @@ namespace FDMS.Migrations
                     b.Navigation("FlightDocumentNavigation");
 
                     b.Navigation("FlightNavigation");
-                });
-
-            modelBuilder.Entity("FDMS.Entity.FlightDocument_GroupPermission", b =>
-                {
-                    b.HasOne("FDMS.Entity.FlightDocument", "FlightDocumentNavigation")
-                        .WithMany("FlightDocument_GroupPermissions")
-                        .HasForeignKey("FlightDocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FDMS.Entity.GroupPermission", "GroupPermissionNavigation")
-                        .WithMany("FlightDocument_GroupPermissions")
-                        .HasForeignKey("GroupPermissionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("FlightDocumentNavigation");
-
-                    b.Navigation("GroupPermissionNavigation");
                 });
 
             modelBuilder.Entity("FDMS.Entity.GroupPermission", b =>
@@ -674,8 +629,6 @@ namespace FDMS.Migrations
 
             modelBuilder.Entity("FDMS.Entity.FlightDocument", b =>
                 {
-                    b.Navigation("FlightDocument_GroupPermissions");
-
                     b.Navigation("FlightDocuments");
                 });
 
@@ -684,8 +637,6 @@ namespace FDMS.Migrations
                     b.Navigation("Account_GroupPermissions");
 
                     b.Navigation("DocumentType_Permissions");
-
-                    b.Navigation("FlightDocument_GroupPermissions");
                 });
 
             modelBuilder.Entity("FDMS.Entity.Role", b =>

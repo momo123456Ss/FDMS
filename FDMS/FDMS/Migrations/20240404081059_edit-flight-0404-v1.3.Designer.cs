@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FDMS.Migrations
 {
     [DbContext(typeof(FDMSContext))]
-    [Migration("20240404054621_createtable-flight-0404-v1.0")]
-    partial class createtableflight0404v10
+    [Migration("20240404081059_edit-flight-0404-v1.3")]
+    partial class editflight0404v13
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,9 +145,11 @@ namespace FDMS.Migrations
 
             modelBuilder.Entity("FDMS.Entity.Flight", b =>
                 {
-                    b.Property<string>("FlightId")
+                    b.Property<int>("FlightId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FlightId"), 1L, 1);
 
                     b.Property<string>("AccountConfirm")
                         .HasMaxLength(50)
@@ -156,9 +158,6 @@ namespace FDMS.Migrations
                     b.Property<DateTime>("ArrivalDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Confirm")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("DepartureDate")
                         .HasColumnType("datetime2");
 
@@ -166,6 +165,9 @@ namespace FDMS.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool?>("IsConfirm")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PointOfLoading")
                         .IsRequired()
@@ -185,6 +187,9 @@ namespace FDMS.Migrations
                     b.Property<string>("Signature")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("TotalDocuments")
+                        .HasColumnType("int");
 
                     b.HasKey("FlightId");
 

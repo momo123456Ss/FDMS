@@ -18,7 +18,7 @@ namespace FDMS.Controllers
         }      
         [HttpPost("CreateAccount")]
         [Authorize (Policy = "RequireAdministrator")]
-        public async Task<IActionResult> CreateAccount([FromForm] AccountCreateModel model)
+        public async Task<IActionResult> CreateAccount([FromBody] AccountCreateModel model)
         {
             try
             {

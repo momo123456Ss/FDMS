@@ -17,7 +17,7 @@ namespace FDMS.Controllers
         {
             this._iGeneralRepository = iGeneralRepository;
         }
-        [HttpPost("UpdateGeneral")]
+        [HttpPut("UpdateGeneral")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> UpdateGeneral([FromForm] GeneralUpdateModel model)
         {

@@ -236,5 +236,28 @@ namespace FDMS.Repository.FlightRepository
                 data = _mapper.Map<FilghtViewModel>(f)
             };
         }
+
+        public async Task<APIResponse> GetCurrentFlight()
+        {
+            var user = await _jWTService.ReadToken();
+            if (!user.IsActived)
+            {
+                return new APIResponse
+                {
+                    success = false,
+                    message = "Your account is locked",
+                    msg = "Your account is locked"
+                };
+            }
+            var currentTime = DateTime.Now;
+            var f = await _context.Flights.Where(f => f.DepartureDate <= currentTime && f.ArrivalDate >= currentTime).ToListAsync();
+            return new APIResponse
+            {
+                success = true,
+                message = "Flight found.",
+                msg = "Flight found.",
+                data = _mapper.Map<List<FilghtViewModel>>(f)
+            };
+        }
     }
 }

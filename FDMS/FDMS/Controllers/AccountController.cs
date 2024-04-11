@@ -16,7 +16,7 @@ namespace FDMS.Controllers
         {
             this._accountRepository = accountRepository;
         }
-        [HttpPost("SignIn")]
+        [HttpPost("sign-in")]
         public async Task<IActionResult> SignIn(SignInModel model)
         {
             try
@@ -28,7 +28,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("ChangePassword")]
+        [HttpPost("change-password")]
         [Authorize]
         public async Task<IActionResult> ChangePassword(AccountChangePasswordModel model)
         {

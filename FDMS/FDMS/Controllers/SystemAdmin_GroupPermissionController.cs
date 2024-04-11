@@ -17,7 +17,7 @@ namespace FDMS.Controllers
         {
             this._iGroupPermissionRepository = iGroupPermissionRepository;
         }
-        [HttpGet("GetAllGroup")]
+        [HttpGet("get-all-group")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetAllGroup()
         {
@@ -30,7 +30,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("GetGroupById/{groupId}")]
+        [HttpGet("get-group-by-id/{groupId}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetGroupById(int groupId)
         {
@@ -43,7 +43,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut("UpdateGroupById/{groupId}")]
+        [HttpPut("update-group-by-id/{groupId}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> UpdateRoleById(int groupId, GroupPermissionCreateOrUpdateModel model)
         {
@@ -51,7 +51,7 @@ namespace FDMS.Controllers
                 return Ok(await _iGroupPermissionRepository.Update(groupId, model));
 
         }
-        [HttpPost("CreateNew")]
+        [HttpPost("create-new")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> CreateNew(GroupPermissionCreateOrUpdateModel model)
         {
@@ -64,7 +64,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpDelete("GroupDelete/{groupId}")]
+        [HttpDelete("group-delete/{groupId}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> RoleRemove(int groupId)
         {
@@ -77,7 +77,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("AddUser")]
+        [HttpPost("add-user")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> AddUser([FromBody] GroupPermission_AddUserCreateModelcs model)
         {
@@ -90,7 +90,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("GetMembers/{groupId}")]
+        [HttpGet("get-members/{groupId}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetMembers(int groupId)
         {
@@ -103,7 +103,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpDelete("RemoveUser")]
+        [HttpDelete("remove-user")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> RemoveUser([FromBody] GroupPermission_AddUserCreateModelcs model)
         {

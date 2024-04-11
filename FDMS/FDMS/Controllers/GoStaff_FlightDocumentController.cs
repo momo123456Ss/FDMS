@@ -60,11 +60,50 @@ namespace FDMS.Controllers
         }
         [HttpGet("get-flight-document")]
         [Authorize(Policy = "RequireGOStaff")]
-        public async Task<IActionResult> GetFlightDocument(string? docType, string? date, string? searchString)
+        public async Task<IActionResult> GetDocumentByGOStaff(string? docType, string? date, string? searchString)
         {
             try
             {
                 return Ok(await _iFlightDocumentRepository.GetDocumentByGOStaff(docType,date,searchString));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet("flight-document/{documentId}/update-version")]
+        [Authorize(Policy = "RequireGOStaff")]
+        public async Task<IActionResult> GetDocumentUpdatedVersion(int documentId)
+        {
+            try
+            {
+                return Ok(await _iFlightDocumentRepository.GetDocumentUpdatedVersion(documentId));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet("flight-document/{documentId}")]
+        [Authorize(Policy = "RequireGOStaff")]
+        public async Task<IActionResult> GetDocumentById(int documentId)
+        {
+            try
+            {
+                return Ok(await _iFlightDocumentRepository.GetDocumentById(documentId));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPut("flight-document/{documentId}/update")]
+        [Authorize(Policy = "RequireGOStaff")]
+        public async Task<IActionResult> Update(int documentId, IFormFile file)
+        {
+            try
+            {
+                return Ok(await _iFlightDocumentRepository.Update(documentId, file));
             }
             catch
             {

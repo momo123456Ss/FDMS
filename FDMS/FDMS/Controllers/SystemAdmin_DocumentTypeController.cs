@@ -17,7 +17,7 @@ namespace FDMS.Controllers
         {
             this._iDocumentTypeRepository = iDocumentTypeRepository;
         }
-        [HttpGet("GetDocumentType")]
+        [HttpGet("get-document-type")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetDocumentType()
         {
@@ -30,7 +30,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("GetDocumentTypeById/{id}")]
+        [HttpGet("get-document-type-by-id/{id}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetDocumentTypeById(int id)
         {
@@ -43,7 +43,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("CreateDocumentType")]
+        [HttpPost("create-document-type")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> CreateDocumentType([FromBody] DocumentTypeCreateOrUpdateModel model)
         {
@@ -56,7 +56,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut("UpdateDocumentType/{id}")]
+        [HttpPut("update-document-type/{id}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> UpdateDocumentType(int id, [FromBody] DocumentTypeCreateOrUpdateModel model)
         {
@@ -69,7 +69,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("AddGroupPermission")]
+        [HttpPost("add-group-permission")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> AddGroupPermission([FromBody] DocumentType_AddGroupCreateOrUpdateModel model)
         {
@@ -82,7 +82,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpDelete("RemoveGroupPermission")]
+        [HttpDelete("remove-group-permission")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> RemoveGroupPermission([FromBody] DocumentType_RemoveGroupDeleteModel model)
         {
@@ -95,7 +95,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("GetGroupPermissionByDocumentTypeId/{id}")]
+        [HttpGet("get-group-permission-by-document-type-id/{id}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetGroupPermissionByDocumentTypeById(int id)
         {

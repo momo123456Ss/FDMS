@@ -1,4 +1,4 @@
-﻿using FDMS.Model;
+﻿    using FDMS.Model;
 using FDMS.Repository.FlightRepository;
 using FDMS.Repository.RoleRepository;
 using Microsoft.AspNetCore.Authorization;
@@ -17,20 +17,9 @@ namespace FDMS.Controllers
         {
             this._iFlightRepository = iFlightRepository;
         }
-        [HttpPost("CreateNew")]
-        [Authorize(Policy = "RequireAdministrator")]
-        public async Task<IActionResult> CreateNew(FlightCreateModel model)
-        {
-            try
-            {
-                return Ok(await _iFlightRepository.CreateFlight(model));
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-        [HttpGet("GetAllFlight")]
+
+       
+        [HttpGet("get-all-flight")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetAllFlight(string? search, string? date)
         {
@@ -43,7 +32,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("GetFlightById/{id}")]
+        [HttpGet("get-flight-by-id/{id}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetFlight(int id)
         {
@@ -56,7 +45,33 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("FlightAddAccount")]
+        [HttpGet("get-current-flight")]
+        [Authorize(Policy = "RequireAdministrator")]
+        public async Task<IActionResult> GetCurrentFlight()
+        {
+            try
+            {
+                return Ok(await _iFlightRepository.GetCurrentFlight());
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("create-new")]
+        [Authorize(Policy = "RequireAdministrator")]
+        public async Task<IActionResult> CreateNew(FlightCreateModel model)
+        {
+            try
+            {
+                return Ok(await _iFlightRepository.CreateFlight(model));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("flight-add-account")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> FlightAddAccount(FlightAddAccount model)
         {
@@ -69,7 +84,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpDelete("FlightRemoveAccount")]
+        [HttpDelete("flight-remove-account")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> FlightRemoveAccount(FlightAddAccount model)
         {

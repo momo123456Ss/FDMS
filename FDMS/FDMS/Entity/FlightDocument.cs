@@ -13,7 +13,7 @@ namespace FDMS.Entity
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int FlightDocumentId { get; set; }
+        public int? FlightDocumentId { get; set; }
         public int Version { get; set; }
         public int VersionPatch {  get; set; }
         [MaxLength(100)]

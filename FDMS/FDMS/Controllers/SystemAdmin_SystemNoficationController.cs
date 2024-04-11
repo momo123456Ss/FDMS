@@ -16,7 +16,7 @@ namespace FDMS.Controllers
         {
             this._iSystemNoficationRepository = iSystemNoficationRepository;
         }
-        [HttpGet("GetAllSystemNofication")]
+        [HttpGet("get-all-system-nofication")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetAllSystemNofication(string? search, string? date)
         {

@@ -27,6 +27,7 @@ namespace FDMS.Model
         public AccountViewModel AccountNavigation { get; set; }
         public int Version { get; set; }
         public int VersionPatch { get; set; }
+        public string VersionToString { get; set; }
         public string FlightNo { get; set; }
         public string? Note { get; set; }
     }

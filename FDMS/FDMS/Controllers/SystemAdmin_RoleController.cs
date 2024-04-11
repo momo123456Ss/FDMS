@@ -17,7 +17,7 @@ namespace FDMS.Controllers
         {
             this._iRoleRepository = iRoleRepository;
         }
-        [HttpGet("GetAllRole")]
+        [HttpGet("get-all-role")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetAllAccount()
         {
@@ -30,7 +30,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut("UpdateRoleById/{roleId}")]
+        [HttpPut("update-role-by-id/{roleId}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> UpdateRoleById(string roleId, RoleCreateOrUpdateModel model)
         {
@@ -43,7 +43,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("CreateNew")]
+        [HttpPost("create-new")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> CreateNew(RoleCreateOrUpdateModel model)
         {
@@ -56,7 +56,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpDelete("RoleDelete/{roleId}")]
+        [HttpDelete("role-delete/{roleId}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> RoleRemove(string roleId)
         {

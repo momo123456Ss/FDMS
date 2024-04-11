@@ -61,6 +61,7 @@ namespace FDMS.Helper
             CreateMap<FlightDocument, FlightDocumentCreateModel>().ReverseMap();
             CreateMap<FlightDocument, FlightDocumentViewModel>()
                 .ForMember(dest => dest.DocumentTypeNavigation, opt => opt.MapFrom(src => src.DocumentTypeNavigation))
+                .ForMember(dest => dest.VersionToString, opt => opt.MapFrom(src => String.Concat($"v{src.Version}.{src.VersionPatch}")))
                 .ForMember(dest => dest.AccountNavigation, opt => opt.MapFrom(src => src.AccountNavigation))
                 .ForMember(dest => dest.FlightNo, opt => opt.MapFrom(src => src.FlightNavigation.FlightCode + src.FlightNavigation.FlightId.ToString("D3")))
                 .ReverseMap();

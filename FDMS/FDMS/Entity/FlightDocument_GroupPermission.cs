@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FDMS.Entity
 {
+    [Table("FlightDocument_GroupPermission")]
     public class FlightDocument_GroupPermission
     {
         [Key]

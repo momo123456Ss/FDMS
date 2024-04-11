@@ -16,7 +16,7 @@ namespace FDMS.Controllers
         {
             this._iFDRepository = iFDRepository;
         }
-        [HttpGet("GetDocumentHistory")]
+        [HttpGet("get-document-history")]
         [Authorize(Policy = "RequireGOStaff")]
         public async Task<IActionResult> GetDocumentHistory(string? search, string? date)
         {

@@ -16,7 +16,7 @@ namespace FDMS.Controllers
         {
             this._iaccountRepository = iaccountRepository;
         }
-        [HttpPut("ChangeOwner/{email}")]
+        [HttpPut("change-owner/{email}")]
         [Authorize(Policy = "RequireOwner")]
         public async Task<IActionResult> ChangeOnwer(string email, string passwordConfim)
         {
@@ -29,7 +29,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("GetOwner")]
+        [HttpGet("get-owner")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetOwner()
         {

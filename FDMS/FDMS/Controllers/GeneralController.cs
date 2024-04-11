@@ -16,7 +16,7 @@ namespace FDMS.Controllers
         {
             _iGeneralRepository = iGeneralRepository;
         }
-        [HttpGet("GetGeneral")]
+        [HttpGet("get-general")]
         public async Task<IActionResult> GetGeneral()
         {
             try

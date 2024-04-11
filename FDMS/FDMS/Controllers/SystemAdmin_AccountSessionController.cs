@@ -16,7 +16,7 @@ namespace FDMS.Controllers
         {
             this._iAccountSessionRepository = iAccountSessionRepository;
         }
-        [HttpGet("GetAllAccountInSession")]
+        [HttpGet("get-all-account-in-session")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetAllAccountInSession()
         {
@@ -29,7 +29,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut("Unlock")]
+        [HttpPut("unlock")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> Unlock(List<string> emails)
         {
@@ -42,7 +42,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut("Lock")]
+        [HttpPut("lock")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> Lock(List<string> emails)
         {

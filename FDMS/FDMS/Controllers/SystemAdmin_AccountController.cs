@@ -16,7 +16,7 @@ namespace FDMS.Controllers
         {
             this._iaccountRepository = iaccountRepository;
         }      
-        [HttpPost("CreateAccount")]
+        [HttpPost("create-account")]
         [Authorize (Policy = "RequireAdministrator")]
         public async Task<IActionResult> CreateAccount([FromBody] AccountCreateModel model)
         {
@@ -29,7 +29,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("RenewPassword")]
+        [HttpPost("renew-password")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> RenewPassword([FromBody] MailData model)
         {
@@ -55,7 +55,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("GetAccountByEmail/{email}")]
+        [HttpGet("get-account-by-email/{email}")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetAccountByEmail(string email)
         {
@@ -68,7 +68,7 @@ namespace FDMS.Controllers
                 return BadRequest();
             }
         }
-        [HttpGet("GetAllAccount")]
+        [HttpGet("get-all-account")]
         [Authorize(Policy = "RequireAdministrator")]
         public async Task<IActionResult> GetAllAccount(string? search)
         {

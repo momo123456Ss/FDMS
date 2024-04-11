@@ -12,6 +12,8 @@ namespace FDMS.Repository.FlightRepository
         Task<APIResponse> GetFlightAccount();
         Task<APIResponse> FlightConfirm(int flightId, FlightConfirmModel model);
         Task<APIResponse> GetById(int flightId);
+        Task<APIResponse> GetCurrentFlight();
+
 
     }
 }

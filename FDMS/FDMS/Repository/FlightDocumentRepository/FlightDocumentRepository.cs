@@ -9,6 +9,7 @@ using FDMS.Service.CloudinaryService;
 using FDMS.Service.JWTService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.FileIO;
+using MimeKit;
 using System.Linq;
 
 namespace FDMS.Repository.FlightDocumentRepository
@@ -21,6 +22,7 @@ namespace FDMS.Repository.FlightDocumentRepository
         private readonly IConfiguration _iConfiguration;
         private readonly IFDRepository _iFDRepository;
         private readonly ICloudinaryService _cloudinaryService;
+
         public FlightDocumentRepository(IJWTService jWTService, FDMSContext context,
             IMapper mapper, IConfiguration iConfiguration,
             IFDRepository iFDRepository, ICloudinaryService cloudinaryService)
@@ -32,6 +34,7 @@ namespace FDMS.Repository.FlightDocumentRepository
             _iFDRepository = iFDRepository;
             _cloudinaryService = cloudinaryService;
         }
+
         private bool IsEmailInReadOnlyGroups(string email)
         {
             var readOnlyGroups = _context.Account_GroupPermissions
@@ -221,7 +224,7 @@ namespace FDMS.Repository.FlightDocumentRepository
             if (!user.RoleNavigation.RoleId.Equals(_iConfiguration["Role:admin-id"]) ||
                 !user.RoleNavigation.RoleId.Equals(_iConfiguration["Role:owner-id"]))
             {
-                allD = allD.Where(a => a.Creator.Equals(user.Email));               
+                allD = allD.Where(a => a.Creator.Equals(user.Email));
             }
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -496,7 +499,7 @@ namespace FDMS.Repository.FlightDocumentRepository
                         msg = "Your account not permission to modify"
                     };
                 }
-            }         
+            }
             try
             {
                 var previousDocument = await _context.FlightDocuments
@@ -629,6 +632,18 @@ namespace FDMS.Repository.FlightDocumentRepository
                 msg = "List flight document.",
                 data = _mapper.Map<List<FlightDocumentViewModel>>(allD)
             };
+        }
+
+        public async Task<List<int>> GetListDocumentId(int flightId)
+        {
+            var listDocumentId = await _context.FlightDocuments
+                    .Include(dt => dt.DocumentTypeNavigation)
+                    .Include(c => c.AccountNavigation).ThenInclude(r => r.RoleNavigation)
+                    .Include(f => f.FlightNavigation)
+                    .Where(f => f.FlightId.Equals(flightId))
+                    .Select(f => (int) f.FlightDocumentId)
+                    .ToListAsync();
+            return listDocumentId;
         }
     }
 }

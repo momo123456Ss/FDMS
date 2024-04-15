@@ -8,7 +8,7 @@ namespace FDMS.Repository.FlightDocumentRepository
         Task<APIResponse> Delete(int documentId);
         Task<APIResponse> Update(int documentId, IFormFile file);
 
-
+        Task<List<int>> GetListDocumentId(int flightId);
         Task<APIResponse> GetDocumentByFlightId(int flightId);
         Task<APIResponse> GetDocumentByGOStaff(string docType, string date, string searchString);
         Task<APIResponse> GetDocumentUpdatedVersion(int documentId);
